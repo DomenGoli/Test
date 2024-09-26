@@ -643,7 +643,12 @@ class Scout(Frame):
         cursor.execute('SELECT * FROM zgodovina')
         records = cursor.fetchall()
 
-        table = ttk.Treeview(self.right_panel, columns=('opis', 'kolicina', 'datum', 'stanje'), show='headings')
+        scrollbar = Scrollbar(self.right_panel)
+        scrollbar.pack(side="right", fill="y")
+
+        table = ttk.Treeview(self.right_panel, columns=('opis', 'kolicina', 'datum', 'stanje'),
+                             show='headings', yscrollcommand=scrollbar.set)
+        scrollbar.config(command=table.yview)
         table.heading('opis', text='Opis')
         table.column('opis', minwidth=0, width=90)
         table.heading('kolicina', text='Kolicina')
@@ -661,6 +666,8 @@ class Scout(Frame):
             stanje = str(record[3])
             data = (opis, kolicina, datum, stanje)
             table.insert(parent='', index=END, values=data)
+
+        table.yview_moveto(1)
 
 
         connect.commit()
