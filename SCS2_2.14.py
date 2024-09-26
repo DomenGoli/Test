@@ -14,14 +14,12 @@ from configparser import ConfigParser
 #ChangeLog:
 #Inventory_amount zdaj bere iz SQL
 #Dodano opozorilo za odsotnost database patha
+#Dodana razpredelnica za zgodovino invertarja
 
 
 ver = "v2.14"
-local = "C:\\Users\\M\\Desktop\\scscout2"
-# script_path = Path(__file__).parent
-# local = script_path
-# remote = C:\\Users\\M\\Desktop\\scscout\\Desktop-iqqp1bg\\SC programi
-# database = C:\\Users\\M\\Desktop\\scscout\\remotedb
+script_path = Path(__file__).parent
+local = script_path
 # database = \\\\192.168.50.30\\Dokumentacija\\SC programi
 suf = '.txt'
 suf19 = '.s19'
