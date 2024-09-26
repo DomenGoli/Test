@@ -39,19 +39,23 @@ connection_db = None
 
 config = ConfigParser()
 config.read('configfile.ini')
+
 remote_data = config['HOST']
 remote = remote_data['remote']
+
 database_data = config['HOST']
 database = database_data['database']
+
 config_data = config['DEF']
 frame_config_val = int(config_data['frame'])
 var_set = int(config_data['frame'])
 
-class Scout(Frame):
+
+class App(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         master.title('ScoutSC 2')
-        master.geometry('510x420+500+500')
+        master.geometry('510x420+1500+500')
         master.resizable(width=False, height=False)
         master.minsize(width=510, height=420)
 
@@ -84,7 +88,7 @@ class Scout(Frame):
 
     def layout_panels(self, cl1, cl2, cl3, cl4):
         self.main_line_panel = Frame(self, bg=cl1, width=480, height=50)
-        self.status_panel = Frame(self, bg=cl2, width=480, height=30, bd=1)#, relief=SUNKEN)
+        self.status_panel = Frame(self, bg=cl2, width=480, height=30, bd=1)
         self.left_panel = Frame(self, bg=cl3, width=80, height=280)
         self.right_panel = Frame(self, bg=cl4, width=450, height=450)
 
@@ -650,13 +654,13 @@ class Scout(Frame):
                              show='headings', yscrollcommand=scrollbar.set)
         scrollbar.config(command=table.yview)
         table.heading('opis', text='Opis')
-        table.column('opis', minwidth=0, width=90)
+        table.column('opis', minwidth=0, width=130)
         table.heading('kolicina', text='Kolicina')
-        table.column('kolicina', minwidth=0, width=90)
+        table.column('kolicina', minwidth=0, width=40)
         table.heading('datum', text='Datum')
         table.column('datum', minwidth=0, width=90)
         table.heading('stanje', text='Stanje')
-        table.column('stanje', minwidth=0, width=90)
+        table.column('stanje', minwidth=0, width=40)
         table.pack(fill = 'both', expand=True)
 
         for record in records:
@@ -668,7 +672,6 @@ class Scout(Frame):
             table.insert(parent='', index=END, values=data)
 
         table.yview_moveto(1)
-
 
         connect.commit()
         connect.close()
@@ -729,5 +732,5 @@ class Scout(Frame):
 
 
 root = Tk()
-app = Scout(master=root)
-app.mainloop()
+scout = App(master=root)
+scout.mainloop()
